@@ -1,18 +1,16 @@
 const cadastrarUsuario = () => {
-    const email = document.getElementById('email').value;
-    const senha = document.getElementeById('senha').value;
-    const mensagem = document.getElementById('mensagem');
+    const email = document.getElementById("email").value
+    const senha = document.getElementById("senha").value
+    const mensagem = document.getElementById("mensagem")
 
-    fetch('http://localhost:8080/usuario', {
-        method: 'POST',
+    fetch("http://localhost:8080/usuario", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({ email, senha })
     })
-    .then(response =>
-        response.json().then(data => ({ status: response.status, body: data }))
-    )
+    .then(response => response.json().then(data => ({ status: response.status, body: data })))
     .then(({ status, body }) => {
         if (status >= 400) {
             let erroMensagem = body.mensagem;
@@ -27,7 +25,7 @@ const cadastrarUsuario = () => {
             mensagem.classList.remove('Erro');
             mensagem.classList.add('Sucesso', 'visivel');
 
-            document.getElementById('CadastroForm').requestFullscreen();
+            document.getElementById('CadastroForm').rest();
         }
 
         exibirMensagem();
