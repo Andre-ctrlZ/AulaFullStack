@@ -7,12 +7,16 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.apache.logging.log4j.message.Message;
 
 @Entity
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "O nome é obrigatório")
+    private String nome;
 
     @NotBlank(message ="O email é obrigatório")
     @Email(message = "Deve ser um email válido.")
@@ -25,10 +29,11 @@ public class Usuario {
     public Usuario(){
     }
 
-    public Usuario(Long id, String email, String senha) {
+    public Usuario(Long id, String email, String senha, String nome) {
         this.id = id;
         this.email = email;
         this.senha = senha;
+        this.nome = nome;
     }
 
     public Long getId() {
@@ -53,5 +58,13 @@ public class Usuario {
 
     public void setSenha(@NotBlank(message = "A senha é obrigatória") @Size(min = 3, message = "A senha deve ter no mínimo 3 caracteres.") String senha) {
         this.senha = senha;
+    }
+
+    public @NotBlank(message = "O nome é obrigatório") String getNome() {
+        return nome;
+    }
+
+    public void setNome(@NotBlank(message = "O nome é obrigatório") String nome) {
+        this.nome = nome;
     }
 }

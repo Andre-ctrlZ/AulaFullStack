@@ -32,6 +32,7 @@ public class UsuarioService {
         Usuario usuarioAtualizar = usuarioRepository.findById(usuario.getId())
                 .orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
 
+        usuarioAtualizar.setNome(usuarioAtualizar.getNome());
         usuarioAtualizar.setEmail(usuario.getEmail());
         usuarioAtualizar.setSenha(usuarioAtualizar.getSenha());
 
