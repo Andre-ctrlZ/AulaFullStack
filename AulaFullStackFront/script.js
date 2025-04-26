@@ -9,7 +9,7 @@ const cadastrarUsuario = () => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ email, senha })
+        body: JSON.stringify({ nome, email, senha })
     })
     .then(response => response.json().then(data => ({ status: response.status, body: data })))
     .then(({ status, body }) => {
@@ -23,17 +23,17 @@ const cadastrarUsuario = () => {
             mensagem.classList.add('erro', 'visivel');
         } else {
             mensagem.textContent = body.mensagem || 'Usuário cadastrado com sucesso!';
-            mensagem.classList.remove('Erro');
-            mensagem.classList.add('Sucesso', 'visivel');
+            mensagem.classList.remove('erro');
+            mensagem.classList.add('sucesso', 'visivel');
 
-            document.getElementById('CadastroForm').rest();
+            document.getElementById('CadastroForm').reset();
         }
 
         exibirMensagem();
     })
     .catch(() => {
         mensagem.textContent = 'Erro ao conectar ao servidor.';
-        mensagem.classList.remove('Sucesso');
+        mensagem.classList.remove('sucesso');
         mensagem.classList.add('erro', 'visivel');
         exibirMensagem();
     });
